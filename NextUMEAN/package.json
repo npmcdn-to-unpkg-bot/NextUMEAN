@@ -1,10 +1,28 @@
 {
-  "name": "next-umean",
+  "name": "nexu-nodejs-web2",
   "version": "0.0.0",
-  "description": "NextUMEAN",
+  "description": "NexUNodeJSWeb2",
   "main": "server.js",
   "author": {
     "name": "nefta",
-    "email": ""
+    "email": "neftalimich@gmail.com"
+  },
+  "license": "ISC",
+  "readme": "README.md",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "body-parser": "^1.15.2",
+    "connect-multiparty": "^2.0.0",
+    "connect-redis": "^3.1.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "lodash": "^4.13.1",
+    "mongoose": "^4.5.3",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "swig": "^1.4.2"
   }
 }
