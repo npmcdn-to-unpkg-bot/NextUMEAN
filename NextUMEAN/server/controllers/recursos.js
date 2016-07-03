@@ -8,7 +8,7 @@ var async = require('async');
 
 var newRecurso = new Recurso({});
 
-exports.guardar_recurso = function (req, res, next) {
+exports.guardarRecurso = function (req, res, next) {
 	async.series({
 		archivos : function (callback) {
 			if (req.files.file.length > 0) {
@@ -34,11 +34,39 @@ exports.guardar_recurso = function (req, res, next) {
 		} else {
 			res.send({ msj : "Falló" });
 			console.log(err);
-
 		}
 	});
 };
 
+exports.getRecursosRecibidos = function (req, res, next) {
+	Recurso.find({ destinatarios : req.session.passport.user.nombre_usuario })
+	.populate('remitente')
+	.exec(function (err, recursos) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(recursos);
+			//console.log(recursos);
+		}
+	});
+};
+
+exports.getRecursosEnviados = function (req, res, next) {
+	console.log('Recursos Enviados');
+	Recurso.find({ remitente : req.session.passport.user._id })
+	.populate('remitente')
+	.exec(function (err, recursos) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(recursos);
+			//console.log(recursos);
+		}
+	});
+};
+
+
+//-------------------------------- Funciones
 function guardar_archivos(req, res, i, file) {
 	var root = path.dirname(require.main.filename);
 	var originalFilename = file.originalFilename.split('.')
@@ -66,13 +94,9 @@ function guardar_archivos(req, res, i, file) {
 	
 	oldFile.on('error', function () {
 		newFile.close();
-		console.log('Carga completa!');
+		console.log('Error!');
 		res.end('Error!');
 	});
-	//oldFile.on('close', function () {
-	//	console.log('Carga completa!');
-	//	res.end('Close!');
-	//});
 
 	return nombre_archivo;
 };

@@ -10,19 +10,23 @@ app.config(['$stateProvider', "$urlRouterProvider",
 			templateUrl : 'partials/index/templates/index.html',
 			controller : 'indexCtrl'
 		})
+
 		.state('app.dashboard', {
 			url : '/dashboard',
 			templateUrl : 'partials/dashboard/templates/dashboard.html'
 		})
+
 		.state('app.chat', {
 			url : '/chat',
 			templateUrl : 'partials/chat/templates/chat.html'
 		})
+
 		.state('app.tareas', {
 			url : '/tareas',
 			templateUrl : 'partials/tareas/templates/tareas.html',
 			controller : 'tareasCtrl'
 		})
+
 		.state('app.recursos', {
 			url : '/recursos',
 			templateUrl : 'partials/recursos/templates/recursos.html',
@@ -33,6 +37,17 @@ app.config(['$stateProvider', "$urlRouterProvider",
 			templateUrl : 'partials/recursos/templates/crear.html',
 			controller : 'recursosCtrl'
 		})
+		.state('app.recursos.enviados', {
+			url : '/enviados',
+			templateUrl : 'partials/recursos/templates/enviados.html',
+			controller : 'enviadosCtrl'
+		})
+		.state('app.recursos.recibidos', {
+			url : '/recibidos',
+			templateUrl : 'partials/recursos/templates/recibidos.html',
+			controller : 'recibidosCtrl'
+		})
+
 		.state('registro', {
 			url : '/registro',
 			templateUrl : 'partials/sign/templates/registro.html',

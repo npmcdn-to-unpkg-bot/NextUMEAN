@@ -31,13 +31,13 @@ module.exports = function (app) {
 	
 	app.post('/tareas/finalizadas', tareas.guardarFinalizadas);
 	
-	app.post('/recurso', multiparty, recursos.guardar_recurso);
+	app.post('/recurso', multiparty, recursos.guardarRecurso);
+	
+	app.get('/recursos/recibidos', recursos.getRecursosRecibidos);
+	
+	app.get('/recursos/enviados', recursos.getRecursosEnviados);
 
     app.get('*', function (req, res) {
         res.render('index');
 	});
-
-	app.all('*', function (req, res) {
-		res.sendFile(__dirname + '/index.html') /* <= Where my ng-view is located */
-	})
 };

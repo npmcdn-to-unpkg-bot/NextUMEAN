@@ -1,4 +1,6 @@
-angular.module('Teamapp').controller('recursosCtrl', function ($scope, $http, $state, ToastService, RecursosService) {
+var app = angular.module('Teamapp');
+
+app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, RecursosService) {
 	$scope.filesChanged = function (elm) {
 		$scope.files = elm.files;
 		$scope.$apply();
@@ -21,13 +23,25 @@ angular.module('Teamapp').controller('recursosCtrl', function ($scope, $http, $s
 			console.log(d);
 			ToastService.success('Enviado correctamente!');
 			$state.transitionTo('app.recursos');
+		})
+		.error(function (err) {
+			alert(err);
 		});
 	};
+});
 
-    /*RecursosService.getRecursosRecibidos()
-    .success(function (response){
-    	$scope.recursos = response;
-    	console.log($scope.recursos);
-    });*/
 
+app.controller('enviadosCtrl', function ($scope, RecursosService) {
+	RecursosService.getRecursosEnviados()
+    .success(function (response) {
+		console.log(response);
+		$scope.enviados = response;
+	});
+});
+
+app.controller('recibidosCtrl', function ($scope, RecursosService) {
+	RecursosService.getRecursosRecibidos()
+    .success(function (response) {
+		$scope.recibidos = response;
+	});
 });
