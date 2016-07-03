@@ -65,6 +65,18 @@ exports.getRecursosEnviados = function (req, res, next) {
 	});
 };
 
+exports.getDetalleRecurso = function (req, res, next) {
+	console.log(req.params.id_recurso, "Detalle");
+	Recurso.findOne({ _id : req.params.id_recurso })
+	.populate('remitente')
+	.exec(function (err, recurso) {
+		if (!err) {
+			res.send(recurso);
+		} else {
+			console.log(recurso);
+		}
+	});
+};
 
 //-------------------------------- Funciones
 function guardar_archivos(req, res, i, file) {

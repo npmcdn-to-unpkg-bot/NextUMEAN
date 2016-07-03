@@ -7,7 +7,7 @@ angular.module('Teamapp').factory('RecursosService', function ($http) {
 			return $http.get('/recursos/enviados')
 		},
 		getDetalle : function (recurso) {
-			return $http.get('/recurso/' + recurso)
+			return $http.get('/recurso/' + recurso.id)
 		}
 	}
 });

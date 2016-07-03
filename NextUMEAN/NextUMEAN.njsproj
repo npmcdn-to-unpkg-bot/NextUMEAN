@@ -209,6 +209,7 @@
     <Content Include="public\app\includes\sidebar.html" />
     <Content Include="public\app\index\templates\index.html" />
     <Content Include="public\app\recursos\templates\crear.html" />
+    <Content Include="public\app\recursos\templates\detalle.html" />
     <Content Include="public\app\recursos\templates\enviados.html" />
     <Content Include="public\app\recursos\templates\recibidos.html" />
     <Content Include="public\app\recursos\templates\recursos.html" />

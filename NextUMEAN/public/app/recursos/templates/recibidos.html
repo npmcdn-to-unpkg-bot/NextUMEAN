@@ -3,12 +3,12 @@
         <tr ng-show="!recibidos.length">
             <td> No hay recursos compartidos contigo aún.</td>
         </tr>
-        <tr ng-repeat="recurso in recibidos" class="unread">
+        <tr ng-repeat="recurso in recibidos" class="unread" ui-sref="app.recursos.detalle({ id_recurso : '{{recurso._id.toString()}}' })" style="cursor:pointer">
             <!--td class="small-col"><input type="checkbox" /></td-->
             <!--td class="small-col"><i class="fa fa-star"></i></td-->
             <td class="name">{{recurso.remitente.nombre}}</td>
             <td class="subject">{{recurso.asunto}}</td>
-            <td class="time">{{recurso.fecha}}</td>
+            <td class="time"> {{recurso.fecha | date: 'yyyy-MM-dd HH:mm'}}</td>
         </tr>
     </table>
 </div>

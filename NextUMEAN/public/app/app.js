@@ -47,6 +47,11 @@ app.config(['$stateProvider', "$urlRouterProvider",
 			templateUrl : 'partials/recursos/templates/recibidos.html',
 			controller : 'recibidosCtrl'
 		})
+		.state('app.recursos.detalle', {
+			url : '/:id_recurso',
+			templateUrl : 'partials/recursos/templates/detalle.html',
+			controller : 'detalleCtrl'
+		})
 
 		.state('registro', {
 			url : '/registro',

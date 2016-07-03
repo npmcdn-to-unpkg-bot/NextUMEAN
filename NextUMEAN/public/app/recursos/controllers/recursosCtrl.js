@@ -45,3 +45,13 @@ app.controller('recibidosCtrl', function ($scope, RecursosService) {
 		$scope.recibidos = response;
 	});
 });
+
+app.controller('detalleCtrl', function ($scope, $stateParams, RecursosService) {
+	if ($stateParams.hasOwnProperty('id_recurso')) {
+		var id_recurso = $stateParams.id_recurso;
+		RecursosService.getDetalle({ id : id_recurso })
+        .success(function (response) {
+			$scope.recurso = response;
+		});
+	}
+});
