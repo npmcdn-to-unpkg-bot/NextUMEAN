@@ -1,0 +1,10 @@
+{
+  "name": "next-umean",
+  "version": "0.0.0",
+  "description": "NextUMEAN",
+  "main": "server.js",
+  "author": {
+    "name": "nefta",
+    "email": ""
+  }
+}
