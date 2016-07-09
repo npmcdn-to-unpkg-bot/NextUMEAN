@@ -31,6 +31,10 @@ module.exports = function (server) {
             socket.broadcast.emit('usuarios:lista', usuarios);
         });
 
+        socket.on('nuevo:mensaje:general', function (mensaje) {
+            io.emit('mensaje:general', mensaje);
+        });
+
         socket.on('usuarios', function (data) {
             socket.emit('usuarios:lista', usuarios);
         });

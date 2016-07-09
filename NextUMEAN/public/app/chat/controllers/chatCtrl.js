@@ -10,6 +10,21 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
         Socket.emit('usuarios');
     }
 
+    $scope.enviarMensajeGeneral = function () {
+        Session.getUsuario()
+            .then(function (response) {
+                var data = {};
+                var nombre = response.data.user.user.nombre;
+                data = { contenido: $scope.mensaje, tipo: 'general', nombre: nombre, fecha: new Date() };
+                Socket.emit('nuevo:mensaje:general', data);
+                $scope.mensaje = "";
+            });
+    };
+
+    $scope.goToChat = function () {
+        $state.go('app.chat.general');
+    };
+
     Socket.on('usuarios:lista', function (usuarios) {
         Session.getUsuario()
             .then(function (response) {

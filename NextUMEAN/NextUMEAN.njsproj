@@ -209,6 +209,7 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="public\app\chat\templates\chat.html" />
+    <Content Include="public\app\chat\templates\general.html" />
     <Content Include="public\app\dashboard\templates\dashboard.html" />
     <Content Include="public\app\includes\navbar.html" />
     <Content Include="public\app\includes\sidebar.html" />
