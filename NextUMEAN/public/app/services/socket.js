@@ -10,6 +10,9 @@ angular.module('Teamapp').factory('Socket', function ($rootScope, Session) {
     });
 
     return {
+        init: function () {
+            socket.removeAllListeners();
+        },
         on: function (eventName, callback) {
             socket.on(eventName, function () {
                 var args = arguments;

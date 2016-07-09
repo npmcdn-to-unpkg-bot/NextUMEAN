@@ -28,6 +28,11 @@ app.config(['$stateProvider', "$urlRouterProvider", "$locationProvider",
                 templateUrl: 'partials/chat/templates/general.html',
                 controller: 'chatCtrl'
             })
+            .state('app.chat.individual', {
+                url: '/:id_chat',
+                templateUrl: 'partials/chat/templates/individual.html',
+                controller: 'chatCtrl'
+            })
 
             .state('app.tareas', {
                 url: '/tareas',

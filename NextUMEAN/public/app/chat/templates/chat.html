@@ -10,11 +10,12 @@
                     <div style="margin-top: 15px;">
                         <ul class="nav nav-pills nav-stacked" style="overflow:auto;height:300px;">
                             <li class="header">Equipo</li>
-                            <li ui-sref-active="active"><a ng-click="goToChat()" href="javascript:void(0);">
+                            <li ui-sref-active="active"><a ng-click="goToChat('general')" href="javascript:void(0);">
                                 <i class="fa fa-group zz"></i> General</a>
                             </li>
                             <li ui-sref-active="active" ng-repeat="usuario in usuarios_conectados">
-                                <a ng-click="goToChat(usuario._id)">
+                                <!--a ui-sref="app.chat.individual({ id_usuario : '{{usuario._id}}' })"-->
+                                <a ng-click="goToChat(usuario._id)" href="javascript:void(0);">
                                     <i class="fa fa-circle text-success"></i>
                                     {{usuario.nick}}
                                 </a>

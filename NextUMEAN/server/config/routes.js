@@ -2,6 +2,8 @@
 var tareas = require('../controllers/tareas');
 var recursos = require('../controllers/recursos');
 var timeline = require('../controllers/timeline');
+var chat = require('../controllers/chat');
+
 var passport = require('./passport');
 var multiparty = require('connect-multiparty')();
 
@@ -25,7 +27,9 @@ module.exports = function (app) {
 	
 	app.post('/tareas', tareas.guardar);
 	app.get('/tareas', tareas.getTareas);
-	app.post('/tareas/finalizadas', tareas.guardarFinalizadas, timeline.tareaFinalizada);
+    app.post('/tareas/finalizadas', tareas.guardarFinalizadas, timeline.tareaFinalizada);
+
+    app.post('/conversacion', chat.crear_dar_conversacion);
 	
 	app.post('/recurso', multiparty, recursos.guardarRecurso, timeline.recursoEnviado);
 	app.get('/recursos/recibidos', recursos.getRecursosRecibidos);

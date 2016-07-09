@@ -35,6 +35,13 @@ module.exports = function (server) {
             io.emit('mensaje:general', mensaje);
         });
 
+        socket.on('nuevo:mensaje:individual', function (mensaje) {
+            var index = _.findIndex(usuarios, { _id: mensaje.destinatario._id });
+            if (index > -1) {
+                socket.broadcast.in(usuarios[index].socket).emit('mensaje:individual', mensaje);
+            }
+        });
+
         socket.on('usuarios', function (data) {
             socket.emit('usuarios:lista', usuarios);
         });
