@@ -39,8 +39,9 @@ exports.tareaFinalizada = function (req, res, next) {
 			}
 		], function (err, data) {
 			if (!err) {
-				//res.send(data);
-				console.log(data);
+				res.send({ populated : data, lean : req.body.tareas });
+				console.log("Acción guardada");
+				console.log("tarea");
 			} else {
 				console.log(err);
 			}

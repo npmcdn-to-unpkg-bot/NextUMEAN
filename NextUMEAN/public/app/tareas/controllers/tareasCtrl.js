@@ -1,4 +1,4 @@
-angular.module('Teamapp').controller('tareasCtrl', function ($scope, TareasService) {
+angular.module('Teamapp').controller('tareasCtrl', function ($scope, TareasService, Socket) {
 	var checkeados = [];
 	
 	$scope.tareas = [];
@@ -21,13 +21,14 @@ angular.module('Teamapp').controller('tareasCtrl', function ($scope, TareasServi
 		var ids = _.pluck(checkeados, '_id');
 		TareasService.guardarFinalizadas({ ids : ids })
 		.then(function (response) {
-			_.each(response.data, function (item) {
+			_.each(response.data.lean, function (item) {
 				var item = item;
 				$scope.tareas_finalizadas.push(item);
 				_.remove($scope.tareas, function (tarea) {
 					return tarea._id === item._id;
 				});
 			});
+			Socket.emit('nueva:tarea', response.data.populated);
 		});
 	};
 	

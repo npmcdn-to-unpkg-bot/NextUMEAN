@@ -11,15 +11,18 @@ var newRecurso = new Recurso({});
 exports.guardarRecurso = function (req, res, next) {
 	async.series({
 		archivos : function (callback) {
-			if (req.files.file.length > 0) {
-				var result = _.map(req.files.file, function (file, i) {
-					return guardar_archivos(req, res, i, file);;
-				});
-				//newRecurso.archivos = result;
-				callback(null, result);
+			if (req.files.hasOwnProperty('files')) {
+				console.log(req.files);
+				if (req.files.file.length > 0) {
+					var result = _.map(req.files.file, function (file, i) {
+						return guardar_archivos(req, res, i, file);;
+					});
+					callback(null, result);
+				} else {
+					callback(null, guardar_archivos(req, res, 0, req.files.file));
+				}
 			} else {
-				//newRecurso.archivos.push();
-				callback(null, guardar_archivos(req, res, 0, req.files.file));
+				callback(null, []);
 			}
 		},
 		datos : function (callback) {
@@ -29,9 +32,11 @@ exports.guardarRecurso = function (req, res, next) {
 	}, function (err, result) {
 		if (!err) {
 			guardar_recurso(result, function (recurso) {
-				req.body.recurso = recurso;
-				res.send(recurso);
-				next();
+				Recurso.populate(recurso, { path : 'remitente', model : 'Usuario', select : 'nombre nombre_usuario' }, function (err, recurso) {
+					req.body.recurso = recurso;
+					res.send(recurso);
+					next();
+				});
 			});
 		} else {
 			res.send({ msj : "Falló" });
@@ -106,11 +111,11 @@ function guardar_archivos(req, res, i, file) {
 		res.end('Carga completa!');
 	});
 	
-	oldFile.on('error', function () {
-		newFile.close();
-		console.log('Error!');
-		res.end('Error!');
-	});
+	//oldFile.on('error', function () {
+	//	newFile.close();
+	//	console.log('Error!');
+	//	res.end('Error!');
+	//});
 
 	return nombre_archivo;
 };

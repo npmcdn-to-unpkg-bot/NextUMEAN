@@ -1,6 +1,6 @@
 var app = angular.module('Teamapp');
 
-app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, RecursosService) {
+app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, RecursosService, Socket) {
 	$scope.filesChanged = function (elm) {
 		$scope.files = elm.files;
 		$scope.$apply();
@@ -19,10 +19,10 @@ app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, Re
 			transformRequest: angular.identity,
 			headers : { 'Content-Type' : undefined }
 		})
-        .success(function (d) {
-			console.log(d);
+        .success(function (response) {
+			Socket.emit('nuevo:recurso', response);
 			ToastService.success('Enviado correctamente!');
-			$state.transitionTo('app.recursos');
+			//$state.transitionTo('app.recursos');
 		})
 		.error(function (err) {
 			alert(err);
@@ -34,7 +34,6 @@ app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, Re
 app.controller('enviadosCtrl', function ($scope, RecursosService) {
 	RecursosService.getRecursosEnviados()
     .success(function (response) {
-		console.log(response);
 		$scope.enviados = response;
 	});
 });

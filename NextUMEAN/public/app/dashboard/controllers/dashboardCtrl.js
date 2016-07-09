@@ -1,4 +1,4 @@
-angular.module('Teamapp').controller('dashboardCtrl', function ($scope, DashboardService) {
+angular.module('Teamapp').controller('dashboardCtrl', function ($scope, DashboardService, Socket) {
 	$scope.today = new Date();
 	$scope.timeline = [];
 	
@@ -12,4 +12,10 @@ angular.module('Teamapp').controller('dashboardCtrl', function ($scope, Dashboar
 			$scope.timeline.unshift(item);
 		});
 	};
+
+	Socket.on('nueva:accion', function (data) {
+		console.log('Data Completo', data);
+		$scope.unshiftTimeline(data);
+		console.log($scope.timeline);
+	});
 });

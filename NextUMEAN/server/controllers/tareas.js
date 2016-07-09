@@ -36,7 +36,8 @@ exports.getTareas = function (req, res, next) {
 exports.guardarFinalizadas = function (req, res, next) {
 	var ids = req.body.ids;
 	
-	Tareas.find({ _id : { $in : ids } }).exec(function (err, tareas) {
+	Tareas.find({ _id : { $in : ids } })
+	.exec(function (err, tareas) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -47,7 +48,7 @@ exports.guardarFinalizadas = function (req, res, next) {
 			});
 			
 			req.body.tareas = tareas;
-			res.send(tareas);
+			//res.send(tareas);
 			next();
 		}
 	});
