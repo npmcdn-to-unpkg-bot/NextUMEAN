@@ -29,7 +29,9 @@ exports.guardarRecurso = function (req, res, next) {
 	}, function (err, result) {
 		if (!err) {
 			guardar_recurso(result, function (recurso) {
+				req.body.recurso = recurso;
 				res.send(recurso);
+				next();
 			});
 		} else {
 			res.send({ msj : "Falló" });

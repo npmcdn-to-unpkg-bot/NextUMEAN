@@ -35,6 +35,7 @@
     <Compile Include="public\app\directives\files.js" />
     <Compile Include="public\app\index\controllers\indexCtrl.js" />
     <Compile Include="public\app\recursos\controllers\recursosCtrl.js" />
+    <Compile Include="public\app\services\dashboard.js" />
     <Compile Include="public\app\services\recursos.js" />
     <Compile Include="public\app\services\session.js" />
     <Compile Include="public\app\services\tareas.js" />
@@ -194,6 +195,7 @@
     <Compile Include="server\config\routes.js" />
     <Compile Include="server\controllers\recursos.js" />
     <Compile Include="server\controllers\tareas.js" />
+    <Compile Include="server\controllers\timeline.js" />
     <Compile Include="server\controllers\usuarios.js" />
     <Compile Include="server\models\chat.js" />
     <Compile Include="server\models\models.js" />

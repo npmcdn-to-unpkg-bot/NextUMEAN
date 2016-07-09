@@ -46,7 +46,9 @@ exports.guardarFinalizadas = function (req, res, next) {
 				tarea.save();
 			});
 			
+			req.body.tareas = tareas;
 			res.send(tareas);
+			next();
 		}
 	});
 };

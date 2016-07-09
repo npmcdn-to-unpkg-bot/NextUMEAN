@@ -13,7 +13,8 @@ app.config(['$stateProvider', "$urlRouterProvider",
 
 		.state('app.dashboard', {
 			url : '/dashboard',
-			templateUrl : 'partials/dashboard/templates/dashboard.html'
+			templateUrl : 'partials/dashboard/templates/dashboard.html',
+			controller : 'dashboardCtrl'
 		})
 
 		.state('app.chat', {
