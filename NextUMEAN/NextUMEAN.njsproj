@@ -169,6 +169,12 @@
     <Compile Include="public\js\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Compile Include="public\vendor\angular-animate\angular-animate.js" />
     <Compile Include="public\vendor\angular-animate\angular-animate.min.js" />
+    <Compile Include="public\vendor\angular-socket-io\gulpfile.js" />
+    <Compile Include="public\vendor\angular-socket-io\karma.conf.js" />
+    <Compile Include="public\vendor\angular-socket-io\mock\socket-io.js" />
+    <Compile Include="public\vendor\angular-socket-io\socket.js" />
+    <Compile Include="public\vendor\angular-socket-io\socket.min.js" />
+    <Compile Include="public\vendor\angular-socket-io\socket.spec.js" />
     <Compile Include="public\vendor\angular-toastr\dist\angular-toastr.js" />
     <Compile Include="public\vendor\angular-toastr\dist\angular-toastr.min.js" />
     <Compile Include="public\vendor\angular-ui-router\release\angular-ui-router.js" />
@@ -210,6 +216,7 @@
     <Content Include="package.json" />
     <Content Include="public\app\chat\templates\chat.html" />
     <Content Include="public\app\chat\templates\general.html" />
+    <Content Include="public\app\chat\templates\individual.html" />
     <Content Include="public\app\dashboard\templates\dashboard.html" />
     <Content Include="public\app\includes\navbar.html" />
     <Content Include="public\app\includes\sidebar.html" />
@@ -416,6 +423,14 @@
     <Content Include="public\vendor\angular-animate\bower.json" />
     <Content Include="public\vendor\angular-animate\package.json" />
     <Content Include="public\vendor\angular-animate\README.md" />
+    <Content Include="public\vendor\angular-socket-io\.bower.json" />
+    <Content Include="public\vendor\angular-socket-io\.gitignore" />
+    <Content Include="public\vendor\angular-socket-io\.travis.yml" />
+    <Content Include="public\vendor\angular-socket-io\bower.json" />
+    <Content Include="public\vendor\angular-socket-io\npm-install.sh" />
+    <Content Include="public\vendor\angular-socket-io\package.json" />
+    <Content Include="public\vendor\angular-socket-io\README.md" />
+    <Content Include="public\vendor\angular-socket-io\socket.min.js.map" />
     <Content Include="public\vendor\angular-toastr\.bower.json" />
     <Content Include="public\vendor\angular-toastr\bower.json" />
     <Content Include="public\vendor\angular-toastr\dist\angular-toastr.css" />
@@ -525,6 +540,8 @@
     <Folder Include="public\recursos\" />
     <Folder Include="public\vendor\" />
     <Folder Include="public\vendor\angular-animate\" />
+    <Folder Include="public\vendor\angular-socket-io\" />
+    <Folder Include="public\vendor\angular-socket-io\mock\" />
     <Folder Include="public\vendor\angular-toastr\" />
     <Folder Include="public\vendor\angular-toastr\dist\" />
     <Folder Include="public\vendor\angular-ui-router\" />
