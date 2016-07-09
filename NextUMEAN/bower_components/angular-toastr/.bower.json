@@ -1,0 +1,44 @@
+{
+  "name": "angular-toastr",
+  "version": "0.5.2",
+  "authors": [
+    "Jesus Rodriguez <Foxandxss@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "toast",
+    "toastr"
+  ],
+  "main": [
+    "./dist/angular-toastr.tpls.js",
+    "./dist/angular-toastr.css"
+  ],
+  "ignore": [
+    "config",
+    "node_modules",
+    "playground",
+    "src",
+    "test",
+    ".travis.yml",
+    ".gitignore",
+    ".jshintrc",
+    "CHANGELOG.md",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": ">=1.3.0"
+  },
+  "homepage": "https://github.com/Foxandxss/angular-toastr",
+  "_release": "0.5.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.2",
+    "commit": "4cfc4121693f576fe57d8408f6754ac6716c62f0"
+  },
+  "_source": "https://github.com/Foxandxss/angular-toastr.git",
+  "_target": "~0.5.2",
+  "_originalSource": "angular-toastr"
+}

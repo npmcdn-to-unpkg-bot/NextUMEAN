@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\chat\controllers\chatCtrl.js" />
     <Compile Include="public\app\dashboard\controllers\dashboardCtrl.js" />
     <Compile Include="public\app\directives\files.js" />
     <Compile Include="public\app\index\controllers\indexCtrl.js" />

@@ -19,7 +19,8 @@ app.config(['$stateProvider', "$urlRouterProvider",
 
 		.state('app.chat', {
 			url : '/chat',
-			templateUrl : 'partials/chat/templates/chat.html'
+            templateUrl: 'partials/chat/templates/chat.html',
+            controller: 'chatCtrl'
 		})
 
 		.state('app.tareas', {

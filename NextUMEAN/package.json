@@ -1,7 +1,7 @@
 {
-  "name": "nexu-nodejs-web2",
-  "version": "0.0.0",
-  "description": "NexUNodeJSWeb2",
+  "name": "nexu-mean",
+  "version": "0.0.8",
+  "description": "NexU MEAN",
   "main": "server.js",
   "author": {
     "name": "nefta",
