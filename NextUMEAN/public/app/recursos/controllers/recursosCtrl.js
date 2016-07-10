@@ -21,8 +21,9 @@ app.controller('recursosCtrl', function ($scope, $http, $state, ToastService, Re
 		})
         .success(function (response) {
 			Socket.emit('nuevo:recurso', response);
-			ToastService.success('Enviado correctamente!');
-			//$state.transitionTo('app.recursos');
+			//
+            $state.transitionTo('app.recursos');
+            ToastService.success('Enviado correctamente!');
 		})
 		.error(function (err) {
 			alert(err);
