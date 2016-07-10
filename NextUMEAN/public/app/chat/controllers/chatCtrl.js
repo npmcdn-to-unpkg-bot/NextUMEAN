@@ -25,6 +25,7 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
         ChatService.enviarMensaje(data)
             .then(function (response) {
                 data.remitente = response.data.remitente;
+                //alert(response.data.remitente);
                 Socket.emit('nuevo:mensaje:general', data);
                 $scope.mensaje = "";
             });
@@ -37,7 +38,7 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
             tipo: 'individual',
             destinatario: { _id: $scope.otro._id.toString() },
             chat: $scope.chat,
-            fecha: new Date()
+            fecha: new Date(),
         };
         ChatService.enviarMensaje(data)
             .success(function (response) {

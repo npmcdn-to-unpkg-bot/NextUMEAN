@@ -11,6 +11,14 @@
             <div class="form-group">
                 <input type="password" name="password" ng-model="usuario.password" class="form-control" placeholder="Password" />
             </div>
+            <div class="form-group">
+                <select name="avatars" ng-model="usuario.avatar" class="form-control">
+                    <option value="avatar1.png" selected="selected">avatar1</option>
+                    <option value="avatar2.png">avatar2</option>
+                    <option value="avatar3.png">avatar3</option>
+                    <option value="avatar4.png">avatar4</option>
+                </select>
+            </div>
         </div>
         <div class="footer">
             <button type="submit" ng-disabled="enviando" class="btn bg-olive btn-block">Registrar</button>

@@ -1,5 +1,6 @@
 angular.module('Teamapp').controller('registroCtrl', function($scope, $http, $state){
-	$scope.usuario = {};
+    $scope.usuario = {};
+    $scope.usuario.avatar = "avatar1.png";
 
 	$scope.register = function(){
 		$scope.enviando = true;

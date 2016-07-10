@@ -133,16 +133,42 @@ exports.enviar_mensaje = function (req, res, next) {
             .exec(function (err, chat) {
                 if (!err) {
                     var datos = {
-                        remitente: req.body.remitente,
+                        remitente: req.session.passport.user._id,
                         destinatario: req.body.destinatario,
                         contenido: req.body.contenido,
                         fecha: req.body.fecha
                     };
                     chat.mensajes.push(datos);
+                    chat.remitente = req.session.passport.user._id;
                     chat.save(function (err, chat) {
                         if (!err) {
-                            Chat.populate(chat, { path: 'remitente', model: 'Usuario' }, function (err, chat) {
-                                res.send(chat);
+                            async.waterfall([
+                                function (callback) {
+                                    Usuario.populate(chat, { path: 'mensajes.remitente' }, function (err, r1) {
+                                        if (err) {
+                                            console.log("Error populate remitente: " + err);
+                                        } else {
+                                            console.log(r1);
+                                        }
+                                        callback(null, r1);
+                                    });
+                                },
+                                function (r1, callback) {
+                                    Chat.populate(r1, { path: 'remitente', model: 'Usuario' }, function (err, r2) {
+                                        if (err) {
+                                            console.log("Error populate destinatario: " + err);
+                                        } else {
+                                            console.log(r1);
+                                        }
+                                        callback(null, r2);
+                                    });
+                                }
+                            ], function (err, mensaje) {
+                                if (!err) {
+                                    res.send(mensaje);
+                                } else {
+                                    res.send({ success: false, message: err });
+                                }
                             });
                         };
                     });
@@ -157,6 +183,7 @@ exports.get_mensajes_generales = function (req, res, next) {
         .populate('mensajes.remitente')
         .exec(function (err, chat) {
             if (!err) {
+                chat.yo = chat.remitente;
                 res.send(chat);
             } else {
                 console.log(err);
@@ -195,4 +222,4 @@ function whoIsMe(usuario, chat) {
     }
 
     return data;
-}
+};

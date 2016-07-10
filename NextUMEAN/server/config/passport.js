@@ -62,7 +62,6 @@ passport.use(
 							done(err, null);
 							return;
 						}
-						
 						done(null, user);
 					});
 				} else {

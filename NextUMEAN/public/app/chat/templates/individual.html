@@ -5,7 +5,7 @@
     </div>
 	<div class="box-body chat" id="chat-box" style="overflow:auto;height:300px;" scroll-glue>
 		<div class="item" ng-repeat="message in messagesList[chat]">
-			<img src="img/avatar.png" alt="user image" class="online"/>
+			<img src="img/avatar/{{message.remitente.avatar}}" alt="user image" class="online"/>
 			<p class="message">
 				<a href="#" class="name">
 					<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{message.fecha | date: 'HH:mm:ss a'}}</small>

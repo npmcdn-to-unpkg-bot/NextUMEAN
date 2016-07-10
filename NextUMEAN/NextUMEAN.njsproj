@@ -387,11 +387,11 @@
     <Content Include="public\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="public\img\ajax-loader.gif" />
     <Content Include="public\img\ajax-loader1.gif" />
-    <Content Include="public\img\avatar.png" />
-    <Content Include="public\img\avatar04.png" />
-    <Content Include="public\img\avatar2.png" />
-    <Content Include="public\img\avatar3.png" />
-    <Content Include="public\img\avatar5.png" />
+    <Content Include="public\img\avatar\avatar.png" />
+    <Content Include="public\img\avatar\avatar2.png" />
+    <Content Include="public\img\avatar\avatar3.png" />
+    <Content Include="public\img\avatar\avatar4.png" />
+    <Content Include="public\img\avatar\avatar5.png" />
     <Content Include="public\img\blur-background04.jpg" />
     <Content Include="public\img\blur-background08.jpg" />
     <Content Include="public\img\blur-background09.jpg" />
@@ -515,6 +515,7 @@
     <Folder Include="public\css\timepicker\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\img\" />
+    <Folder Include="public\img\avatar\" />
     <Folder Include="public\img\bootstrap-colorpicker\" />
     <Folder Include="public\img\credit\" />
     <Folder Include="public\js\" />

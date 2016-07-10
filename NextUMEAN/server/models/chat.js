@@ -9,7 +9,8 @@ var chatSchema = new Schema({
 			remitente : { type : Schema.Types.ObjectId, ref : 'Usuario' },
 			destinatario : { type : Schema.Types.ObjectId, ref : 'Usuario' },
             contenido: String,
-            fecha: { type: Date }
+            fecha: { type: Date },
+            remitenteNombr: { type: String }
 		}
 	]
 });
