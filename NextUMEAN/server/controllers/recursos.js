@@ -11,7 +11,7 @@ var newRecurso = new Recurso({});
 exports.guardarRecurso = function (req, res, next) {
     async.series({
         archivos: function (callback) {
-            if (req.files.hasOwnProperty('files')) {
+            if (req.files.hasOwnProperty('file')) {
                 console.log(req.files);
                 if (req.files.file.length > 0) {
                     var result = _.map(req.files.file, function (file, i) {
@@ -39,6 +39,7 @@ exports.guardarRecurso = function (req, res, next) {
                 Recurso.populate(recurso, { path: 'remitente', model: 'Usuario', select: 'nombre nombre_usuario' }, function (err, recurso) {
                     req.body.recurso = recurso;
                     //res.send(recurso);
+                    newRecurso = new Recurso({});
                     next();
                 });
             });
@@ -116,17 +117,15 @@ function guardar_archivos(req, res, i, file) {
     oldFile.pipe(newFile);
 
     oldFile.on('data', function (chunk) {
-
         bytes_subidos += chunk.length;
         var progreso = (bytes_subidos / bytes_totales) * 100;
         //console.log("progress: "+parseInt(progreso, 10) + '%\n');
-        res.write("progress: " + parseInt(progreso, 10) + '%\n');
-
+        //res.write("progress: " + parseInt(progreso, 10) + '%\n');
     });
 
     oldFile.on('end', function () {
         console.log('Carga completa!');
-        res.end('Carga completa!');
+        //res.end('Carga completa!');
     });
 
     return nombre_archivo;
