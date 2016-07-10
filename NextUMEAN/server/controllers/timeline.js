@@ -1,5 +1,6 @@
 var Timeline = require('../models/timeline');
 var Tareas = require('../models/tareas');
+var Recursos = require('../models/recursos');
 
 var ObjectId = require('mongoose').Types.ObjectId;
 var _ = require('lodash');
@@ -18,8 +19,7 @@ exports.tareaFinalizada = function (req, res, next) {
 		
 		timeline.save(function (err, item) {
 			if (!err) {
-				console.log("Acción guardada");
-				//console.log(item);
+				console.log("Acción:Tarea guardada");
 				return callback(null, item);
 			}
 		});
@@ -40,8 +40,6 @@ exports.tareaFinalizada = function (req, res, next) {
 		], function (err, data) {
 			if (!err) {
 				res.send({ populated : data, lean : req.body.tareas });
-				console.log("Acción guardada");
-				console.log("tarea");
 			} else {
 				console.log(err);
 			}
@@ -50,7 +48,8 @@ exports.tareaFinalizada = function (req, res, next) {
 };
 
 exports.recursoEnviado = function (req, res, next) {
-	var timeline = new Timeline({
+    var timeline = new Timeline({
+        usuario: req.body.recurso.remitente,
 		recurso : req.body.recurso._id,
 		accion : 'compartió un recurso',
 		descripcion : req.body.recurso.asunto,
@@ -59,8 +58,11 @@ exports.recursoEnviado = function (req, res, next) {
 	
 	timeline.save(function (err, recurso) {
 		if (!err) {
-			console.log("Acción guardada");
-			console.log("recurso");
+		    console.log("Acción:Recurso guardada");
+		    Timeline.populate(recurso, { path : 'recurso', model : 'Recurso' }, function (err, recurso) {
+		        req.body.recurso = recurso;
+		        res.send(recurso);
+		    });
 		}
 	});
 };

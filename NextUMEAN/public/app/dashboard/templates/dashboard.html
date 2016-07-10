@@ -18,7 +18,10 @@
                     </div>
                 </div>
                 <div class="timeline-item" ng-show="item.tipo == 'recurso'">
-                    <h3 class="timeline-header"><a href="javascript:void(0);">{{item.recurso.remitente.nombre}}</a> {{item.accion}} con {{item.recurso.destinatarios.join(',')}}</h3>
+                    <h3 class="timeline-header"><a href="javascript:void(0);">
+                        {{item.usuario.nombre}}</a> {{item.accion}} con {{item.recurso.destinatarios.join(',')}}
+                        <span class="pull-right">{{item.fecha | date: 'HH:mm:ss a'}}</span>
+                    </h3>
                     <div class="timeline-body">
                         {{item.descripcion}}
                     </div>
