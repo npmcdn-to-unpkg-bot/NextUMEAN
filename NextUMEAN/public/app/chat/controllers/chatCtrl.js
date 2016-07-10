@@ -1,6 +1,5 @@
 var app = angular.module('Teamapp');
 
-
 app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Session, ChatService) {
     $scope.usuarios_conectados = [];
     //$scope.messagesList = new Object();
@@ -17,26 +16,39 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
     }
 
     $scope.enviarMensajeGeneral = function () {
-        Session.getUsuario()
+        var data = {};
+        data = {
+            contenido: $scope.mensaje,
+            tipo: 'general',
+            fecha: new Date()
+        };
+        ChatService.enviarMensaje(data)
             .then(function (response) {
-                var data = {};
-                var nombre = response.data.user.user.nombre;
-                data = { contenido: $scope.mensaje, tipo: 'general', nombre: nombre };
+                data.remitente = response.data.remitente;
                 Socket.emit('nuevo:mensaje:general', data);
                 $scope.mensaje = "";
             });
     };
 
     $scope.enviarMensajeIndividual = function () {
-        Session.getUsuario()
-            .then(function (response) {
-                var data = {};
-                var nombre = response.data.user.user.nombre;
-                data = { contenido: $scope.mensaje, tipo: 'individual', destinatario: { _id: $scope.otro._id.toString() }, remitente: { nombre: nombre }, chat: $scope.chat };
-                $scope.messages.push(data);
-                $scope.messagesList[$scope.chat] = $scope.messages;
+        var data = {};
+        data = {
+            contenido: $scope.mensaje,
+            tipo: 'individual',
+            destinatario: { _id: $scope.otro._id.toString() },
+            chat: $scope.chat,
+            fecha: new Date()
+        };
+        ChatService.enviarMensaje(data)
+            .success(function (response) {
+                console.log(response);
+                data.remitente = response.mensajes[0].remitente;
+                //$scope.messages.push(response.mensajes);
+                $scope.setChat(data);
                 Socket.emit('nuevo:mensaje:individual', data);
                 $scope.mensaje = "";
+            }).error(function (response) {
+                console.error(response);
             });
     };
 
@@ -54,23 +66,60 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
     };
 
     $scope.getTipoChat = function (callback) {
-        var id = $stateParams.hasOwnProperty('id_chat');
+        var id = $state.params.hasOwnProperty('id_chat');
         if (id) {
-            callback($stateParams.id_chat);
+            callback($state.params.id_chat);
+        } else {
+            callback("general");
         }
         //$scope.messagesList[$scope.chat] = [];
     };
 
-    $scope.whereIAm = function () {
+    $scope.whereIAm = function (callback) {
         $scope.getTipoChat(function (tipo) {
             $scope.chat = tipo;
+            if (typeof callback == "function") {
+                callback($scope.chat);
+            }
+        });
+    };
+
+    $scope.getMensajes = function () {
+        $scope.whereIAm(function (chat) {
+            if (chat == "general") {
+                //console.log("general");
+                $scope.goToChat("general");
+                ChatService.getMensajesGenerales()
+                    .success(function (response) {
+                        console.log(response);
+                        $scope.messagesG = response[0].mensajes;
+                        //console.log($scope.messagesG);
+                    });
+            } else {
+                //console.log("individual");
+                ChatService.getMensajesIndividuales({ chat: $scope.chat })
+                    .success(function (response) {
+                        $scope.goToChat(response.otro._id);
+                        _.each(response.chat.mensajes, function (mensaje) {
+                            mensaje.chat = response.chat._id;
+                        });
+                        $scope.messagesList[$scope.chat] = response.chat.mensajes;
+                    });
+            }
         });
     } ();
 
-    $scope.getMessagesChat = function (list) {
-        //var messages = _.pluck(_.filter(list, {"chat" : $scope.chat }), 'messages');
-        var messages = list[$scope.chat];
-        return messages;
+    $scope.setChat = function (mensaje) {
+        if ($scope.messagesList) {
+            if (mensaje.chat && $scope.chat) {
+                if ($scope.messagesList.hasOwnProperty(mensaje.chat)) {
+                    $scope.messagesList[mensaje.chat].push(mensaje);
+                } else {
+                    $scope.messagesList[mensaje.chat] = new Array();
+                    $scope.messagesList[mensaje.chat].push(mensaje);
+                }
+            }
+        }
     };
 
     Socket.on('usuarios:lista', function (usuarios) {
@@ -88,21 +137,8 @@ app.controller('chatCtrl', function ($scope, $stateParams, $state, Socket, Sessi
         }
     });
 
-
     Socket.on('mensaje:individual', function (mensaje) {
-        if ($scope.messagesList) {
-            if (mensaje.chat && $scope.chat) {
-                //$scope.messages.push(mensaje);
-                //$scope.messagesList[mensaje.chat] = $scope.messages;
-                if ($scope.messagesList.hasOwnProperty(mensaje.chat)) {
-                    $scope.messagesList[mensaje.chat].push(mensaje);
-                } else {
-                    $scope.messagesList[mensaje.chat] = new Array();
-                    $scope.messagesList[mensaje.chat].push(mensaje);
-                }
-                console.log($scope.messagesList, $scope.chat, mensaje);
-            }
-        }
+        $scope.setChat(mensaje);
     });
 
     $scope.$on('$destroy', function (event) {

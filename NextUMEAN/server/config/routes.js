@@ -29,14 +29,17 @@ module.exports = function (app) {
 	app.get('/tareas', tareas.getTareas);
     app.post('/tareas/finalizadas', tareas.guardarFinalizadas, timeline.tareaFinalizada);
 
-    app.post('/conversacion', chat.crear_dar_conversacion);
-	
 	app.post('/recurso', multiparty, recursos.guardarRecurso, timeline.recursoEnviado);
 	app.get('/recursos/recibidos', recursos.getRecursosRecibidos);
 	app.get('/recursos/enviados', recursos.getRecursosEnviados);
 	app.get('/recurso/:id_recurso', recursos.getDetalleRecurso);
 	
-	app.get('/timeline', timeline.getTimeline);
+    app.get('/timeline', timeline.getTimeline);
+
+    app.post('/conversacion', chat.crear_dar_conversacion);
+    app.post('/mensaje', chat.enviar_mensaje);
+    app.get('/mensajes/general', chat.get_mensajes_generales);
+    app.get('/mensajes/:id_chat', chat.get_mensajes_individuales);
 
     app.get('*', function (req, res) {
         res.render('index');

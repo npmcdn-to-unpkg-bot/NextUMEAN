@@ -8,7 +8,8 @@ var chatSchema = new Schema({
 	mensajes : [{
 			remitente : { type : Schema.Types.ObjectId, ref : 'Usuario' },
 			destinatario : { type : Schema.Types.ObjectId, ref : 'Usuario' },
-			contenido : String
+            contenido: String,
+            fecha: { type: Date }
 		}
 	]
 });
